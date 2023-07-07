@@ -112,11 +112,7 @@ def main():
 
             model.fit(train)
 
-    #         forecast_validation = model.predict(validation.drop(columns="y"))
-    # #        forecast_test = model.predict(test.drop(columns = "y"))
-    #         # model.plot(forecast)
-    #         # plt.show()
-    #         # print(forecast)
+   
             future_baseline = model.make_future_dataframe(periods=30)
             future_baseline = pd.merge(left=future_baseline, right=d_f, how='left', on='ds')
             future_baseline = future_baseline.interpolate(method='ffill')
@@ -167,55 +163,15 @@ def main():
     print(scores_df['score'].mean())
     x = rmsle(ddf['true'], ddf['preds'])
     print("total rmsle = ", x)
-    #submission['sales'] = submit
-    #submission.to_csv('submissionProphet.csv')
+  
 
 if __name__ =="__main__":
     main()
 
 
 
-#---- add a graph of the each store and the mean RMSLE !
 
 
 
 
 
-
-
-
-
-# df = df.drop(df.columns[:4], axis=1)
-
-#
-# def to_date(row):
-#     if len(str(int(row.month))) == 1 and len(str(int(row.day))) == 1:
-#         return str(int(row.year)) + "-0" + str(int(row.month)) + "-0" + str(int(row.day))
-#     elif len(str(int(row.month))) == 2 and len(str(int(row.day))) == 1:
-#         return str(int(row.year)) + "-" + str(int(row.month)) + "-0" + str(int(row.day))
-#     elif len(str(int(row.month))) == 1 and len(str(int(row.day))) == 2:
-#         return str(int(row.year)) + "-0" + str(int(row.month)) + "-" + str(int(row.day))
-#     elif len(str(int(row.month))) == 2 and len(str(int(row.day))) == 2:
-#         return str(int(row.year)) + "-" + str(int(row.month)) + "-" + str(int(row.day))
-#
-#
-# df['date'] = df.apply(lambda x: to_date(x), axis=1)
-# df['date'] = pd.to_datetime(df['date'])
-# df.rename(columns={'date': 'ds', 'sales': 'y'}, inplace=True)
-
-# df.to_csv("new_data.csv")
-
-# sns.lineplot(x=df.ds, y=df['y'])
-# plt.show()
-
-#
-# list_of_categories = ['AUTOMOTIVE', 'BABY CARE', 'BEAUTY',
-#        'BEVERAGES', 'BOOKS', 'BREAD/BAKERY', 'CELEBRATION', 'CLEANING',
-#        'DAIRY', 'DELI', 'EGGS', 'FROZEN FOODS', 'GROCERY I', 'GROCERY II',
-#        'HARDWARE', 'HOME AND KITCHEN I', 'HOME AND KITCHEN II',
-#        'HOME APPLIANCES', 'HOME CARE', 'LADIESWEAR', 'LAWN AND GARDEN',
-#        'LINGERIE', 'LIQUOR,WINE,BEER', 'MAGAZINES', 'MEATS', 'PERSONAL CARE',
-#        'PET SUPPLIES', 'PLAYERS AND ELECTRONICS', 'POULTRY', 'PREPARED FOODS',
-#        'PRODUCE', 'SCHOOL AND OFFICE SUPPLIES', 'SEAFOOD']
-
-#
